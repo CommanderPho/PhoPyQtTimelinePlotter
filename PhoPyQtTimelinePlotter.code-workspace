@@ -1,0 +1,32 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/__pycache__": true,
+			"**/*.pyc": true
+		},
+		"actionButtons": {
+			"commands": [
+				{
+					"name": "📚 Build Docs",
+					"tooltip": "Build the documentation using Sphinx",
+					"color": "#ed9600",
+					"useVsCodeApi": false,
+					"command": "cd docs && make html"
+				},
+				{
+					"name": "📖 Open Built Docs",
+					"tooltip": "Open the built documentation in browser",
+					"color": "#00FF00",
+					"useVsCodeApi": false,
+					"command": "start docs/_build/html/index.html"
+				}
+			]
+		}
+	}
+}
+

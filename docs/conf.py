@@ -74,6 +74,10 @@ extensions = [
     "sphinx.ext.napoleon",
 ]
 
+# Optional: For better type hint formatting, install sphinx-autodoc-typehints
+# and uncomment the line below:
+extensions.append("sphinx_autodoc_typehints")
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
 
@@ -106,7 +110,7 @@ master_doc = "index"
 
 # General information about the project.
 project = "PhoPyQtTimelinePlotter"
-copyright = "2022, Pho Hale"
+copyright = "2025, Pho Hale"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -153,6 +157,32 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", ".venv"]
 # If true, sectionauthor and moduleauthor directives will be shown in the
 # output. They are ignored by default.
 # show_authors = False
+
+# -- Options for autodoc extension -------------------------------------------
+
+# Automatically extract typehints when specified and place them in
+# descriptions of the relevant function/method.
+autodoc_typehints = "description"  # Options: 'none', 'description', 'signature', 'both'
+autodoc_typehints_description_target = "documented"  # Options: 'all', 'documented'
+
+# Control what members are documented
+autodoc_default_options = {
+    "members": True,
+    "undoc-members": False,  # Set to True if you want to document undocumented members
+    "inherited-members": False,  # Set to True to show inherited members
+    "show-inheritance": True,
+    "special-members": "__init__",
+    "exclude-members": "__weakref__",
+}
+
+# Mock imports for packages that may not be available during documentation build
+autodoc_mock_imports = []
+
+# -- Options for typehints (if using sphinx-autodoc-typehints) ------------
+# Uncomment these if you install sphinx-autodoc-typehints:
+# typehints_fully_qualified = False
+# typehints_document_rtype = True
+# typehints_defaults = "comma"  # Options: 'comma', 'braces', 'braces-after', 'none'
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = "sphinx"
