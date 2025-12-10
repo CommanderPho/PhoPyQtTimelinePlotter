@@ -53,3 +53,4 @@ MANIFEST
 .conda*/
 .python-version
 src/phopyqttimelineplotter/.ipynb_checkpoints
+EXTERNAL/Databases/BehavioralBoxDatabase.db

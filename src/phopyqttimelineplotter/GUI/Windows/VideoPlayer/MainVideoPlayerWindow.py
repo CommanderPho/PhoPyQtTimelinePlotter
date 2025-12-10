@@ -25,7 +25,7 @@ from phopyqttimelineplotter.app.filesystem.VideoPreviewThumbnailGeneratingMixin 
     VideoThumbnail,
 )
 from phopyqttimelineplotter.app.model import TimestampDelta, TimestampModel, ToggleButtonModel
-from lib import vlc
+
 from PyQt5.QtCore import (
     QDir,
     QModelIndex,
@@ -628,6 +628,8 @@ class MainVideoPlayerWindow(
     close_signal = pyqtSignal()  # Called when the window is closing.
 
     def __init__(self, parent=None):
+        from lib import vlc ## import VLC
+
         # QMainWindow.__init__(self, parent)
         QMainWindow.__init__(self, parent=parent)
         # super().__init__(parent=parent)
@@ -685,7 +687,7 @@ class MainVideoPlayerWindow(
         self.initUI()
 
     def initUI(self):
-
+        from lib import vlc
         # TODO: bind the signals and such to self.ui.timestampSidebarWidget
         # self.ui.timestampSidebarWidget.
 
@@ -914,6 +916,8 @@ class MainVideoPlayerWindow(
 
     # self.update_ui(): called when the timer fires
     def update_ui(self):
+        from lib import vlc
+        
         if self.media_player is None:
             return
 
