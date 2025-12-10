@@ -204,8 +204,7 @@ class DatabaseConnectionRef(QObject):
             self.build_new_database(engine)
             print("New database built at {0}".format(db_file))
 
-        DBSession = sessionmaker()
-        DBSession.bind = engine
+        DBSession = sessionmaker(bind=engine)
         session = DBSession()
         return (engine, DBSession, session)
 

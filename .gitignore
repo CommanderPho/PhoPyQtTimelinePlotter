@@ -54,3 +54,4 @@ MANIFEST
 .python-version
 src/phopyqttimelineplotter/.ipynb_checkpoints
 EXTERNAL/Databases/BehavioralBoxDatabase.db
+external/vlc-portable/

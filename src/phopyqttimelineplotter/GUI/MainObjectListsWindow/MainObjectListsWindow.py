@@ -108,9 +108,10 @@ class MainObjectListsWindow(AbstractDatabaseAccessingWindow):
         super(MainObjectListsWindow, self).__init__(
             database_connection
         )  # Call the inherited classes __init__ method
-        self.ui = uic.loadUi(
-            "GUI/MainObjectListsWindow/MainObjectListsWindow.ui", self
-        )  # Load the .ui file
+        # Resolve UI file path relative to this module's location
+        from pathlib import Path
+        ui_file_path = Path(__file__).parent / "MainObjectListsWindow.ui"
+        self.ui = uic.loadUi(str(ui_file_path), self)  # Load the .ui file
         self.videoLoader = VideoFilesystemLoader(
             self.database_connection, videoFileSearchPaths, parent=self
         )

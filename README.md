@@ -27,6 +27,11 @@ In order to set up the necessary environment:
    ```
    conda activate PhoPyQtTimelinePlotter
    ```
+3. install VLC 3.0.8 64-bit portable (required for video playback):
+   ```
+   python scripts/download_vlc.py
+   ```
+   This will download and extract VLC to `external/vlc-portable`. The application will automatically use this portable version instead of any system-installed VLC, ensuring version compatibility.
 
 > **_NOTE:_**  The conda environment will have PhoPyQtTimelinePlotter installed in editable mode.
 > Some changes, e.g. in `setup.cfg`, might require you to run `pip install -e .` again.

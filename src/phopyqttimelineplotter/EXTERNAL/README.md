@@ -1,6 +1,28 @@
 
 ## Requirements:
-VLC 3.0.8 Vetinari
+VLC 3.0.8 Vetinari (64-bit)
+
+The application uses a portable VLC installation located at `external/vlc-portable/`. This ensures version compatibility and prevents conflicts with system-installed VLC.
+
+### Installing VLC Portable:
+
+**Automatic Installation (Recommended):**
+```bash
+python scripts/download_vlc.py
+```
+
+This script will:
+- Download VLC 3.0.8 64-bit portable from VideoLAN's official repository
+- Extract it to `external/vlc-portable/`
+- Verify the installation
+
+**Manual Installation:**
+If automatic download fails, you can manually download VLC 3.0.8 64-bit portable from:
+https://download.videolan.org/pub/videolan/vlc/3.0.8/win64/vlc-3.0.8-win64.zip
+
+Extract the ZIP file and place the contents in `external/vlc-portable/` such that `external/vlc-portable/libvlc.dll` exists.
+
+**Note:** The portable VLC installation is automatically detected and used by the application. No system-wide VLC installation is required.
 
 (Py3PyQt5)
 

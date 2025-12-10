@@ -1,6 +1,16 @@
 import datetime as dt
 import pathlib
 import sqlite3
+import sys
+
+# Configure VLC before any imports that use it
+# This ensures portable VLC is used if available
+try:
+    from phopyqttimelineplotter.lib import vlc_setup
+    vlc_setup.configure_vlc_environment()
+except Exception as e:
+    # If VLC setup fails, continue - vlc.py will fall back to system VLC
+    print(f"Note: Could not configure portable VLC: {e}")
 
 import matplotlib.colors as mcolors
 import matplotlib.pyplot as plt
@@ -45,7 +55,7 @@ from sqlalchemy.exc import IntegrityError, OperationalError
 
 from phopyqttimelineplotter.GUI.HelpWindow.HelpWindowFinal import *
 from phopyqttimelineplotter.GUI.MainObjectListsWindow.MainObjectListsWindow import *
-# from phopyqttimelineplotter.GUI.MainWindow.TimelineDrawingWindow import *
+from phopyqttimelineplotter.GUI.MainWindow.TimelineDrawingWindow import *
 from phopyqttimelineplotter.GUI.Model.Events.PhoDurationEvent_Video import (
     PhoDurationEvent_Video,
 )
@@ -269,8 +279,12 @@ if __name__ == "__main__":
     # create the application and the main window
     app = TimelineApplication(sys.argv)
 
-    # Style
-    app.setStyleSheet(open("GUI/application.qss", "r").read())
+    # Style - resolve stylesheet path relative to this module's location
+    stylesheet_path = pathlib.Path(__file__).parent / "GUI" / "application.qss"
+    if stylesheet_path.exists():
+        app.setStyleSheet(open(str(stylesheet_path), "r").read())
+    else:
+        print(f"Warning: Stylesheet not found at {stylesheet_path}")
     # app.setStyleSheet(
     #     "QToolTip { border: 2px solid darkkhaki; padding: 5px; border-radius: 3px; background-color: rgba(255,255,0,0); }");
 

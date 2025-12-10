@@ -1,6 +1,7 @@
 import sys
 from datetime import datetime, timedelta, timezone
 from enum import Enum
+from pathlib import Path
 
 import numpy as np
 from orangecanvas.gui.dock import CollapsibleDockWidget
@@ -54,10 +55,8 @@ class TimelineHeaderWidget_ContentsCollapsed(QWidget):
         super(TimelineHeaderWidget_ContentsCollapsed, self).__init__(
             parent=parent
         )  # Call the inherited classes __init__ method
-        self.ui = uic.loadUi(
-            "GUI/UI/TimelineHeaderWidget/TimelineHeaderWidget_ContentsCollapsed.ui",
-            self,
-        )  # Load the .ui file
+        ui_file_path = Path(__file__).parent / "TimelineHeaderWidget_ContentsCollapsed.ui"
+        self.ui = uic.loadUi(str(ui_file_path), self)  # Load the .ui file
         self.initUI()
         self.show()  # Show the GUI
 
@@ -71,9 +70,8 @@ class TimelineHeaderWidget_ContentsExpanded(QWidget):
         super(TimelineHeaderWidget_ContentsExpanded, self).__init__(
             parent=parent
         )  # Call the inherited classes __init__ method
-        self.ui = uic.loadUi(
-            "GUI/UI/TimelineHeaderWidget/TimelineHeaderWidget_ContentsExpanded.ui", self
-        )  # Load the .ui file
+        ui_file_path = Path(__file__).parent / "TimelineHeaderWidget_ContentsExpanded.ui"
+        self.ui = uic.loadUi(str(ui_file_path), self)  # Load the .ui file
         self.initUI()
         self.show()  # Show the GUI
 
@@ -126,9 +124,8 @@ class TimelineHeaderWidget(TrackConfigMixin, QFrame):
         super(TimelineHeaderWidget, self).__init__(
             parent=parent
         )  # Call the inherited classes __init__ method
-        self.ui = uic.loadUi(
-            "GUI/UI/TimelineHeaderWidget/TimelineHeaderWidget.ui", self
-        )  # Load the .ui file
+        ui_file_path = Path(__file__).parent / "TimelineHeaderWidget.ui"
+        self.ui = uic.loadUi(str(ui_file_path), self)  # Load the .ui file
         self.track_config = track_config
         self.track_id = track_config.get_track_id()
         self.track_name = track_config.get_track_title()

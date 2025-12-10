@@ -1,9 +1,11 @@
 # EventsDrawingWindow.py
 # Draws the main window containing several EventTrackDrawingWidgets
 
+import os
 import sys
 from datetime import datetime, timedelta, timezone
 from enum import Enum
+from pathlib import Path
 
 import numpy as np
 from phopyqttimelineplotter.app.database.entry_models.db_model import (
@@ -264,7 +266,9 @@ class TimelineDrawingWindow(
         super(TimelineDrawingWindow, self).__init__(
             database_connection
         )  # Call the inherited classes __init__ method
-        self.ui = uic.loadUi("GUI/MainWindow/MainWindow.ui", self)  # Load the .ui file
+        # Resolve UI file path relative to this module's location
+        ui_file_path = Path(__file__).parent / "MainWindow.ui"
+        self.ui = uic.loadUi(str(ui_file_path), self)  # Load the .ui file
 
         self._shouldGenerateVideoThumbnails = False
 
