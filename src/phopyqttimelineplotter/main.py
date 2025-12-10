@@ -45,7 +45,7 @@ from sqlalchemy.exc import IntegrityError, OperationalError
 
 from phopyqttimelineplotter.GUI.HelpWindow.HelpWindowFinal import *
 from phopyqttimelineplotter.GUI.MainObjectListsWindow.MainObjectListsWindow import *
-from phopyqttimelineplotter.GUI.MainWindow.TimelineDrawingWindow import *
+# from phopyqttimelineplotter.GUI.MainWindow.TimelineDrawingWindow import *
 from phopyqttimelineplotter.GUI.Model.Events.PhoDurationEvent_Video import (
     PhoDurationEvent_Video,
 )
