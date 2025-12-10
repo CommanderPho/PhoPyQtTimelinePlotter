@@ -26,7 +26,7 @@
 					"command": "start docs/_build/html/index.html"
 				}
 			]
-		}
+		},
+		"python.languageServer": "None"
 	}
 }
-
