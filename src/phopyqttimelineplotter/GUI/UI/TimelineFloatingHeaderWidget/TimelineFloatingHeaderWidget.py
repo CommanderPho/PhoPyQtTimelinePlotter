@@ -56,9 +56,9 @@ class TimelineFloatingHeaderWidget(TrackConfigMixin, QWidget):
         super(TimelineFloatingHeaderWidget, self).__init__(
             parent=parent
         )  # Call the inherited classes __init__ method
-        self.ui = uic.loadUi(
-            "GUI/UI/TimelineFloatingHeaderWidget/TimelineFloatingHeaderWidget.ui", self
-        )  # Load the .ui file
+        from pathlib import Path
+        ui_file_path = Path(__file__).parent / "TimelineFloatingHeaderWidget.ui"
+        self.ui = uic.loadUi(str(ui_file_path), self)  # Load the .ui file
         self.track_config = track_config
         self.track_id = track_config.get_track_id()
         self.track_name = track_config.get_track_title()

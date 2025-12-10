@@ -112,6 +112,51 @@ _internal_guard = object()
 def find_lib():
     dll = None
     plugin_path = os.environ.get('PYTHON_VLC_MODULE_PATH', None)
+    
+    # Check for portable VLC installation first (before environment variables)
+    # This allows the project to use its own VLC version without interfering with system installations
+    if sys.platform.startswith('win'):
+        try:
+            # Calculate project root relative to this file
+            # vlc.py is at: src/phopyqttimelineplotter/lib/vlc.py
+            # Project root is: ../../.. relative to this file (lib -> phopyqttimelineplotter -> src -> root)
+            lib_dir = os.path.dirname(os.path.abspath(__file__))
+            project_root = os.path.normpath(os.path.join(lib_dir, '..', '..', '..'))
+            portable_vlc_path = os.path.join(project_root, 'external', 'vlc-portable')
+            portable_dll_path = os.path.join(portable_vlc_path, 'libvlc.dll')
+            portable_plugin_path = os.path.join(portable_vlc_path, 'plugins')
+            
+            if os.path.exists(portable_dll_path) and os.path.isfile(portable_dll_path):
+                # Portable VLC found - use it
+                original_cwd = None
+                try:
+                    # Change to VLC directory to load DLL (helps with dependencies)
+                    original_cwd = os.getcwd()
+                    os.chdir(portable_vlc_path)
+                    dll = ctypes.CDLL(portable_dll_path)
+                    os.chdir(original_cwd)
+                    original_cwd = None  # Mark as successfully restored
+                    
+                    # Set plugin path if it exists
+                    if os.path.isdir(portable_plugin_path):
+                        plugin_path = portable_plugin_path
+                    
+                    logger.info(f"Using portable VLC from: {portable_vlc_path}")
+                    return dll, plugin_path
+                except OSError as e:
+                    logger.warning(f"Failed to load portable VLC from {portable_dll_path}: {e}")
+                    # Restore original directory if we changed it
+                    if original_cwd is not None:
+                        try:
+                            os.chdir(original_cwd)
+                        except Exception:
+                            pass
+                    # Fall through to other detection methods
+        except Exception as e:
+            # If anything goes wrong checking for portable VLC, log and continue
+            logger.debug(f"Error checking for portable VLC: {e}")
+    
+    # Check environment variables (may have been set by vlc_setup.configure_vlc_environment())
     if 'PYTHON_VLC_LIB_PATH' in os.environ:
         try:
             dll = ctypes.CDLL(os.environ['PYTHON_VLC_LIB_PATH'])

@@ -40,6 +40,7 @@ from PyQt5.QtGui import QCursor, QIcon, QPixmap
 from phopyqttimelineplotter.GUI.Helpers.DateTimeRenders import DateTimeRenderMixin
 from phopyqttimelineplotter.GUI.Model.DataMovieLinkInfo import *
 from phopyqttimelineplotter.GUI.Model.Errors import SimpleErrorStatusMixin
+from lib import vlc
 
 """
 The software displays/plays a video file with variable speed and navigation settings.
